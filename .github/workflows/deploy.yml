@@ -1,5 +1,4 @@
-name: Java CI push jobs
-
+name: Java-CI-deploy-jobs
 
 on:
   workflow_run:
