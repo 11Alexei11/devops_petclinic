@@ -8,13 +8,15 @@ on:
 
 jobs:
   build_check_gradle:
+    runs-on: ubuntu-latest
     steps:
       - name: Check if Java-CI-Build-Gradle completed
-      id: Java-CI-Build-Gradle
-      run: |
-        echo "Java-CI-Build-Gradle Conclusion: ${{ github.event.workflow_run.conclusion }}"
+        id: Java-CI-Build-Gradle
+        run: |
+          echo "Java-CI-Build-Gradle Conclusion: ${{ github.event.workflow_run.conclusion }}"
 
   build_check_maven:
+    runs-on: ubuntu-latest
     steps:
       - name: Check if Java-CI-Build-Maven completed
         id: Java-CI-Build-Maven
