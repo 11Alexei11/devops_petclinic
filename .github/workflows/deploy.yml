@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     environment: test
     steps:
       - name: Checkout
@@ -17,12 +17,18 @@ jobs:
       - name: Check if Workflow 1 completed
         id: Java-CI-Build-Gradle
         run: |
-          echo "Workflow 1 Conclusion: ${{ github.event.workflow_run.conclusion }}"
+          echo "Java-CI-Build-Gradle Conclusion: ${{ github.event.workflow_run.conclusion }}"
 
       - name: Check if Workflow 2 completed
         id: Java-CI-Build-Maven
         run: |
-          echo "Workflow 2 Conclusion: ${{ github.event.workflow_run.conclusion }}"
+          echo "Java-CI-Build-Maven Conclusion: ${{ github.event.workflow_run.conclusion }}"
+
+      - name: Proceed to next step only if both workflows are completed
+        if: |
+          ${{ github.event.workflow_run.conclusion == 'success' }}
+        run: |
+          echo "Both Java-CI-Build-Gradle and Java-CI-Build-Maven are complete. Now running the next task."
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
